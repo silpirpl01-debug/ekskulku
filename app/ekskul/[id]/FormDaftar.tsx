@@ -2,7 +2,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { daftarEkskul, type FormState } from "./daftarEkskul";
+import { daftarEkskul, type FormState } from "./DaftarEkskul";
 
 export default function FormDaftar({
   id,

@@ -1,12 +1,14 @@
-
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { ekskul, pendaftar, JAM_SESI } from "@/data/ekskul";
 import TombolBatalkan from "@/app/ekskul/[id]/TombolBatalkan";
 
+
 export const metadata = {
   title: "Ekskul Saya",
 };
+
+export const instant = false;
 
 export default async function Page() {
   const cookieStore = await cookies();
