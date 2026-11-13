@@ -1,13 +1,8 @@
 
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
-import { daftarEkskul, type FormState } from "./DaftarEkskul";
-
-const awal: FormState = {
-  nama: "",
-  kelas: "",
-};
+import { useActionState, useState } from "react";
+import { daftarEkskul, type FormState } from "./daftarEkskul";
 
 export default function FormDaftar({
   id,
@@ -18,22 +13,18 @@ export default function FormDaftar({
   namaAwal: string;
   kelasAwal: string;
 }) {
+  const awal: FormState = {
+    nama: namaAwal,
+    kelas: kelasAwal,
+  };
+
   const [state, formAction, pending] = useActionState(
     daftarEkskul,
-    {
-      ...awal,
-      nama: namaAwal,
-      kelas: kelasAwal,
-    }
+    awal
   );
 
   const [nama, setNama] = useState(namaAwal);
   const [kelas, setKelas] = useState(kelasAwal);
-
-  useEffect(() => {
-    setNama(state.nama);
-    setKelas(state.kelas);
-  }, [state.nama, state.kelas]);
 
   return (
     <section className="mt-8 rounded-xl border p-6">
@@ -48,6 +39,7 @@ export default function FormDaftar({
           <label className="mb-1 block font-medium">
             Nama
           </label>
+
           <input
             name="nama"
             value={nama}
@@ -55,6 +47,7 @@ export default function FormDaftar({
             className="w-full rounded-lg border p-3"
             placeholder="Masukkan nama"
           />
+
           {state.errorNama && (
             <p className="mt-1 text-sm text-red-600">
               {state.errorNama}
@@ -66,6 +59,7 @@ export default function FormDaftar({
           <label className="mb-1 block font-medium">
             Kelas
           </label>
+
           <input
             name="kelas"
             value={kelas}
@@ -73,6 +67,7 @@ export default function FormDaftar({
             className="w-full rounded-lg border p-3"
             placeholder="Contoh: XII RPL 1"
           />
+
           {state.errorKelas && (
             <p className="mt-1 text-sm text-red-600">
               {state.errorKelas}
@@ -81,13 +76,7 @@ export default function FormDaftar({
         </div>
 
         {state.pesan && (
-          <p
-            className={
-              state.berhasil
-                ? "text-green-600"
-                : "text-red-600"
-            }
-          >
+          <p className={state.berhasil ? "text-green-600" : "text-red-600"}>
             {state.pesan}
           </p>
         )}
